@@ -10,4 +10,8 @@ php:
   - 5.4
   - 7.0
 
-script: ./vendor/bin/phpunit
+script:
+  - vendor/bin/phpcs --standard=POET --generator=markdown > POET.md
+  # If this command fails, it means the POET.md file is out of date.
+  - git diff-index --quiet HEAD
+  - vendor/bin/phpunit
